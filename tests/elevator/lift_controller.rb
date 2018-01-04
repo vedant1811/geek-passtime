@@ -1,0 +1,3 @@
+class LiftController
+
+end

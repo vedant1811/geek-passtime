@@ -1,0 +1,19 @@
+* Run the program by calling the +main(input)+ function in main.rb
+  I run it by opening +irb+ in the project directory, then the run the following commands:
+    > load('./main')
+    > input = "P Ford Car Review\nP Review Car\nP Review Ford\nP Toyota Car\nP Honda Car\nP Car\nQ Ford\nQ Car\nQ Review\nQ Ford Review\nQ Ford Car\nQ cooking French\n"
+    > main input
+
+* Both the Query and Page classes are identical as of now. But they need to be separate as they can be extended in different ways. For example:
+  * Page can be extended to have nested pages, or in other words, respresent a website with multiple pages.
+
+  * Qurey can be extended to have negetive keywords. Like a user may serach for "French cars" but not want results for "cuisine"
+
+P Ford Car
+PP Review Car
+PP Review Ford
+P Toyota Car
+PP Car
+Q Ford
+Q Car
+Q Review
