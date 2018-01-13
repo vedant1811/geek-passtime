@@ -4,13 +4,30 @@ import java.util.*;
 
 class Main {
 
+  public static List<Node> diameterFunc(Node root) {
+    List<Node> result = diameter(root);
+    return result.size() > diameter.size() ? result : diameter;
+  }
+
   /*
    * path of diameter
    */
-  private static List<Node> path = null;
+  private static List<Node> diameter = new ArrayList<Node>();
   private static List<Node> diameter(Node root) {
+    if (root == null) return new ArrayList<Node>();
+
     List<Node> left = diameter(root.left);
     List<Node> right = diameter(root.right);
+    if (left.size() + right.size() >= diameter.size()) {
+      diameter.clear();
+      diameter.addAll(left);
+      diameter.add(root);
+      diameter.addAll(right);
+    }
+
+    List<Node> longer = left.size() >= right.size() ? left : right;
+    longer.add(root);
+    return longer;
   }
 
   public static void main(String[] args) {
@@ -23,6 +40,6 @@ class Main {
     root.right.right = new Node(7);
     root.right.left.right = new Node(8);
 
-    System.out.println("diameter = " + diameter(root));
+    System.out.println("diameter = " + diameterFunc(root));
   }
 }
