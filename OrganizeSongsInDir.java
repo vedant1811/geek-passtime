@@ -34,12 +34,16 @@ class Main {
 
     int n = (int) doubleN / x + 1; // number of songs per dir
 
-    while (size(n, L) > C || n == 13) {
+    while (size(n, L) > C || n % 13 == 0) {
       n--;
     }
     int lastN = N % n;
     x = (int) Math.ceil(doubleN / n);
-    if (lastN == 13 && n == 14) x++;
+    if (lastN != 0 && lastN % 13 == 0) {
+      if ((n - 1) % 13 == 0 || x == 1) {
+        x++;
+      }
+    }
     return x;
   }
 
