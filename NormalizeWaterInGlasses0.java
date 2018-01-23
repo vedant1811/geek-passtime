@@ -48,23 +48,20 @@ class Main {
   public static int normalize(int[] glasses) {
     if (glasses == null || glasses.length <= 1) return 0;
 
-    int base = glasses[0];
-    int maxDiff = 0;
-    for (int i = 1; i < glasses.length - 1; i++) {
-      base++;
-      if (glasses[i] < base) {
-        maxDiff = Math.max(maxDiff, base - glasses[i]);
-      } else if (glasses[i] > base) {
-        base = glasses[i];
-      } // nothing to do if equal
+    int x, xMax = 0, diff;
+    for (int i = 0; i < glasses.length - 1; i++) {
+      // now x will be updated
+      int diff = glasses[i] - glasses[i + 1];
+      x = diff/2 + 1;
+      // assume every glasses[j] (where j <= i) has been reduced by x
+      glasses[i + 1] += x - 1;
+
+      if (x > xMax) xMax = x;
     }
-    return (int)Math.ceil(maxDiff/2.0);
+    return xMax;
   }
 
   public static void main(String[] args) {
-    System.out.println("normalized " + normalize(new int[] {9, 5, 11}));
-    System.out.println("normalized " + normalize(new int[] {5,8}));
-    System.out.println("normalized " + normalize(new int[] {9, 10, 11, 5, 11}));
-    System.out.println("normalized " + normalize(new int[] {5,8}));
+    System.out.println("normalized " + normalize([9, 5, 11]));
   }
 }
