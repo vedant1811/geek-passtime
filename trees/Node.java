@@ -14,4 +14,8 @@ class Node {
   public String toString() {
     return "" + value;
   }
+
+  public boolean isLeaf() {
+    return left == null && right == null;
+  }
 }
