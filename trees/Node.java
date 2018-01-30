@@ -18,4 +18,10 @@ class Node {
   public boolean isLeaf() {
     return left == null && right == null;
   }
+
+  public void printInorder() {
+    if (left != null) left.printInorder();
+    System.out.print(this + " ");
+    if (right != null) right.printInorder();
+  }
 }
