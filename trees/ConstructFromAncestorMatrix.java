@@ -31,19 +31,20 @@ class Main {
 
     // now iterate
     Node parent = null, child;
+    Set<Integer> created = new HashSet<>();
     for (List<Integer> rowIs : counts.values()) {
       for (int i : rowIs) {
         parent = nodes[i];
         for (int j = 0; j < n; j++) {
-          if (matrix[i][j] == 1) {
-            // create parent
+          if (matrix[i][j] == 1 && !created.contains(j)) {
             child = nodes[j];
+            if (child == null) continue;
+
             if (parent.left == null) parent.left = child;
             else parent.right = child;
 
-            for (int i2 = 0; i2 < n; i2++) {
-              matrix[i2][j] = 0; // now don't let any other node be its parent
-            }
+            // now don't let any other node be its parent
+            created.add(j);
           }
         }
       }
