@@ -1,5 +1,6 @@
 // https://www.geeksforgeeks.org/find-maximum-value-of-sum-iarri-with-only-rotations-on-given-array-allowed/
 
+// probably incorrect
 class Main {
   public static int maxSumIarrI(int a[]) {
     if (a == null || a.length == 0) return 0;
