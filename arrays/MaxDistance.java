@@ -1,40 +1,39 @@
-// https://www.interviewbit.com/problems/max-distance/
+// https://www.geeksforgeeks.org/given-an-array-arr-find-the-maximum-j-i-such-that-arrj-arri/
 
-public class Solution {
-    // DO NOT MODIFY THE LIST. IT IS READ ONLY
-    public int maximumGap(final List<Integer> A) {
-        if (A == null || A.size() == 0) return -1;
-        if (A.size() == 1) return 0;
+class Main {
+  public static int maxDistance(int[] a) {
+    if (a == null || a.length <= 1) return -1;
 
-        int bucketSize = (int) Math.sqrt(A.size());
-        int nBuckets = (int) Math.ceil(A.size() / ((double)bucketSize) );
-
-        int[] minBucket = new int[nBuckets];
-
-        for (int i = 0; i < nBuckets; i++) {
-            int min = Integer.MIN_VALUE;
-            for (int j = bucketSize * i; j < bucketSize * (i+1) && j < A.size(); j++) {
-                min = Math.min(min, A.get(j));
-            }
-            minBucket[i] = min;
-        }
-
-        for (int i = A.size() - 1; i >= 0; i--) {
-
-            int curBucket = i/bucketSize;
-
-            for (int j = 0; j < curBucket; j++) {
-                if (minBucket[j] > A.get(i)) continue;
-
-                for (int k = j * bucketSize; k <= j * (bucketSize + 1); k++) {
-                    if (A.get(k) <= A.get(i)) return i - k;
-                }
-            }
-
-            for (int j = curBucket * bucketSize; j < i; j++) {
-                if (A.get(j) <= A.get(i)) return i - j;
-            }
-        }
-        return -1;
+    int[] lMin = new int[a.length];
+    lMin[0] = a[0];
+    for (int i = 1; i < lMin.length; i++) {
+      lMin[i] = Math.min(lMin[i-1], a[i]);
     }
+
+    int[] rMax = new int[a.length];
+    rMax[rMax.length - 1] = a[a.length - 1];
+    for (int i = rMax.length - 2; i >= 0; i--) {
+      rMax[i] = Math.max(a[i], rMax[i+1]);
+    }
+
+    int ans = -1;
+    for (int i = 0, j = 1; i < a.length && j < a.length; ) {
+      if (i == j) {
+        j++;
+        continue;
+      }
+
+      if (lMin[i] < rMax[j]) {
+        ans = Math.max(ans, j - i);
+        j++;
+      } else {
+        i++;
+      }
+    }
+    return ans;
+  }
+
+  public static void main(String[] args) {
+    System.out.println(maxDistance(new int[] {9, 2, 3, 4, 5, 6, 7, 8, 18, 0}));
+  }
 }
