@@ -3,13 +3,17 @@
 public class Solution {
     public int sqrt(int a) {
         if (a <= 1) return a;
-        if (a <= 3) return 1;
 
         return (int)sqrt(a, 1, a);
     }
 
     private long sqrt(int a, long start, long end) {
-        if (end - start <= 1) return start;
+        if (end - start <= 0) {
+            if (start * start <= a)
+                return start;
+            else
+                return start - 1;
+        }
 
         long mid = (start + end)/2;
         long midSq = mid * mid;
