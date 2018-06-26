@@ -1,3 +1,5 @@
+# https://www.geeksforgeeks.org/greedy-algorithm-egyptian-fraction/
+
 def egyptian_fraction(nr, dr)
   return if [nr, dr].include? 0
 

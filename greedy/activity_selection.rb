@@ -1,3 +1,5 @@
+# https://www.geeksforgeeks.org/greedy-algorithms-set-1-activity-selection-problem/
+
 def max_activities(start, finish)
   n = start.count
   last = 0
