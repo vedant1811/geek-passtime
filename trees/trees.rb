@@ -1,5 +1,21 @@
 class TreeNode
   attr_accessor :left, :right, :data
+
+  def initialize(data)
+    @data = data
+  end
+end
+
+def sample_tree
+  root = TreeNode.new 2
+  root.left = TreeNode.new 1
+  root.right = TreeNode.new 3
+  root.left.left = TreeNode.new 0
+  root.left.right = TreeNode.new 7
+  root.right.left = TreeNode.new 9
+  root.right.right = TreeNode.new 1
+
+  root
 end
 
 module Treeable
